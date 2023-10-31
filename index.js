@@ -186,3 +186,16 @@ function updateValues() {
   clearInterval(timerInterval);
   input.disabled = false;
 }
+
+function updateValues2() {
+  mistakes = 0;
+  seconds = 60;
+  document.querySelector(".timeLeft span strong").innerHTML = seconds;
+  WPM = 0;
+  CPM = 0;
+  startTimer = false;
+  x.innerHTML = mistakes;
+  update_CPMandWPM(CPM, WPM);
+  clearInterval(timerInterval);
+  input.disabled = false;
+}
