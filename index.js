@@ -173,3 +173,75 @@ if (input.value === "") {
 }
 
 input.addEventListener("input", typeChange);
+
+function updateValues() {
+  mistakes = 0;
+  seconds = 60;
+  document.querySelector(".timeLeft span strong").innerHTML = seconds;
+  WPM = 0;
+  CPM = 0;
+  startTimer = false;
+  x.innerHTML = mistakes;
+  update_CPMandWPM(CPM, WPM);
+  clearInterval(timerInterval);
+  input.disabled = false;
+}
+
+function updateValues2() {
+  mistakes = 0;
+  seconds = 60;
+  document.querySelector(".timeLeft span strong").innerHTML = seconds;
+  WPM = 0;
+  CPM = 0;
+  startTimer = false;
+  x.innerHTML = mistakes;
+  update_CPMandWPM(CPM, WPM);
+  clearInterval(timerInterval);
+  input.disabled = false;
+}
+function typeChange234() {
+  if (!startTimer) {
+    timer();
+  }
+  startTimer = true;
+  //   qs = data.querySelectorAll("span");
+  let typedText = input.value.split("");
+  //   console.log(typedText);
+  if (typedText[charIndex] == null) {
+    charIndex--;
+    if (qs[charIndex].classList.contains("incorrect")) {
+      mistakes--;
+      x.innerHTML = mistakes;
+    }
+    qs[charIndex].classList.remove("correct", "incorrect", "active");
+    qs.forEach((item) => {
+      item.classList.remove("active");
+    });
+    qs[charIndex].classList.add("active");
+  } else {
+    console.log(qs[charIndex].innerHTML, typedText[charIndex]);
+    if (qs[charIndex].innerHTML === typedText[charIndex]) {
+      console.log("Correct");
+      qs[charIndex].classList.add("correct");
+    } else {
+      mistakes++;
+      console.log("incorrect");
+      qs[charIndex].classList.add("incorrect");
+    }
+    qs.forEach((item) => {
+      item.classList.remove("active");
+    });
+    qs[charIndex + 1].classList.add("active");
+    charIndex++;
+    x.innerHTML = mistakes;
+    // function to update CPM and WPM
+  }
+  CPM = input.value.split("").length;
+  WPM = input.value.split(" ").length;
+  // When we backspace characters, it still shows WPM = 1, to avoid it, below line of code is used.
+  if (input.value.split(" ")[0] === "") {
+    WPM = 0;
+  }
+  console.log(input.value.split(" "));
+  update_CPMandWPM(CPM, WPM);
+}
