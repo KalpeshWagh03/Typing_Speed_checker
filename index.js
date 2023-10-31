@@ -74,6 +74,40 @@ function updateValues() {
   input.disabled = false;
 }
 
+
+function timer() {
+  timerInterval = setInterval(() => {
+    seconds--;
+    document.querySelector(".timeLeft span strong").innerHTML = seconds;
+    if (seconds === 0) {
+      clearInterval(timerInterval);
+      input.disabled = true;
+    }
+  }, 1000);
+}
+
+// function to update cpm and wpm
+function update_CPMandWPM(CPM, WPM) {
+  document.querySelector(".CPM span strong").innerHTML = CPM;
+  document.querySelector(".WPM span strong").innerHTML = WPM;
+}
+
+// try again button click functionality
+
+// update values when clicked on try again;
+function updateValues() {
+  mistakes = 0;
+  seconds = 60;
+  document.querySelector(".timeLeft span strong").innerHTML = seconds;
+  WPM = 0;
+  CPM = 0;
+  startTimer = false;
+  x.innerHTML = mistakes;
+  update_CPMandWPM(CPM, WPM);
+  clearInterval(timerInterval);
+  input.disabled = false;
+}
+
 document.querySelector(".tryAgain").addEventListener("click", () => {
   charIndex = 0;
   generateRandomPara();
